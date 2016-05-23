@@ -1,0 +1,6 @@
+images/*
+tmp/*
+.idea/*
+log/*
+.byebug_history/*
+
