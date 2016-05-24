@@ -32,10 +32,14 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        Cart.destroy(session[:cart_id])
+        session[:cart_id] = nil
+        OrderNotifier.received(@order).deliver
+        format.html {redirect_to store_url, notice: 'Спасибо за ваш заказ'}
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -44,12 +48,14 @@ class OrdersController < ApplicationController
     end
   end
 
+
+
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: 'Заказ успешно обновлен.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
