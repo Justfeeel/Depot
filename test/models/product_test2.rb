@@ -3,7 +3,7 @@ class ProductTest < ActiveSupport::TestCase
 fixtures :products
 test "product price must be positive" do
 # цена товара должна быть положительной
-product = Product.new(title:"Ipodpro",description: "...",image_url:"ipodpro.jpg")
+product = Product.new(title:"ipodpro",description: "...",image_url:"ipodpro.jpg")
 product.price = -1
 assert product.invalid?
 assert_equal ["must be greater than or equal to 0.01"],

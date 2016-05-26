@@ -1,6 +1,6 @@
 require 'test_helper'
 class ProductTest < ActiveSupport::TestCase
-fixtures:products
+fixtures :products
 test "product attributes must not be empty" do
 # свойства товара не должны оставаться пустыми
 product = Product.new
