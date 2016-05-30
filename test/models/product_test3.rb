@@ -3,7 +3,7 @@ class ProductTest < ActiveSupport::TestCase
 fixtures :products
 def new_product(image_url)
 Product.new(
-title:"Ipodpro",description:"...",price: 75990, image_url: image_url)
+title:"ipodpro",description:"...",price: 75990, image_url: image_url)
 end
 test "image url" do
 # url изображения
